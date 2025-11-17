@@ -15,9 +15,9 @@ esp_err_t i2c_send_data_block(uint8_t device_addr, uint8_t *data, size_t length)
 #define I2C_MASTER_SCL_IO 37 // GPIO pin for I2C Clock (SCL)
 #define I2C_MASTER_SDA_IO 38 // GPIO pin for I2C Data (SDA)
 #define I2C_MASTER_NUM I2C_NUM_0
-#define I2C_MASTER_FREQ_HZ 100000 // 100 kHz I2C speed
+#define I2C_MASTER_FREQ_HZ 400000 // 400 kHz I2C speed
 #define I2C_TIMEOUT_MS 1000
-#define SLAVE_ADDR 0x55 // Example I2C device address, change according to your AD0 connection
+#define SLAVE_ADDR 0x68 // Changed slave address since AD0 is grounded (JI)
 
 static const char *TAG = "i2c-master-example";
 
@@ -47,7 +47,7 @@ void app_main()
     // -------------------------
     // Step 2: Prepare Data to Send
     // -------------------------
-    uint8_t data_to_send[2] = {'a', 'c'}; // Example data bytes to send
+    uint8_t data_to_send[2] = {0x3A, 0xD6}; // Data block to send, register is 0x3A, data value is 0xD6 (JI)
 
     // -------------------------
     // Step 3: Send Data block to I2C Device
