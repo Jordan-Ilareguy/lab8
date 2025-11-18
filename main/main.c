@@ -110,6 +110,24 @@ void app_main()
     }
 }
 
+/* Function Name - i2c_read_bytes
+
+* Description - This function reads a block of data from an I2C device.
+
+* Return type - The return type is esp_err_t, which indicates the success or failure of the operation.
+
+* Parameters - 
+
+- parameter1 - uint8_t device_addr: The I2C address of the device to read from.
+
+- parameter2 - uint8_t start_reg: The starting register address to read from.
+
+- parameter3 - uint8_t *buffer: A pointer to the buffer to store the read data.
+
+- parameter4 - size_t length: The number of bytes to read.
+
+*/
+
 esp_err_t i2c_read_bytes(uint8_t device_addr, uint8_t start_reg, uint8_t *buffer, size_t length)
 {
     return i2c_master_write_read_device(I2C_MASTER_NUM,
@@ -120,6 +138,23 @@ esp_err_t i2c_read_bytes(uint8_t device_addr, uint8_t start_reg, uint8_t *buffer
                                         length,                                                                                                     
                                         pdMS_TO_TICKS(I2C_TIMEOUT_MS));
 }
+
+/* Function Name - i2c_send_data_block
+
+* Description - This function sends a block of data to an I2C device.
+
+* Return type - The return type is esp_err_t, which indicates the success or failure of the operation.
+
+* Parameters -
+
+- parameter1 - uint8_t device_addr: The I2C address of the device to send data to.
+
+- parameter2 - uint8_t *data: A pointer to the data buffer to send.
+
+- parameter3 - size_t length: The length of the data buffer in bytes.
+
+*/
+
 esp_err_t i2c_send_data_block(uint8_t device_addr, uint8_t *data, size_t length)
 {
     return i2c_master_write_to_device(I2C_MASTER_NUM,
